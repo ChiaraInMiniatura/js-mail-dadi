@@ -22,25 +22,15 @@ const utentiAuto = ["prova","chiarag295@gmail.com", "pincopanco81@gmai.com", "pa
 
 const verificaMail = prompt("Verifica la tua mail");
 
-let emailAutorizzata = false;
 
 for(let i = 0; i < verificaMail.length; i++){
   
   if (verificaMail === utentiAuto[i]) {
 
-    emailAutorizzata = true;
-
     console.log("Ciao! Lancia i dadi per giocare");
 
     document.getElementById("messMail").innerHTML =
     "Ciao! Lancia i dadi per giocare";
-
-  }else{
-
-    console.log("Non sei autorizzato a giocare");
-    
-    document.getElementById("messMail").innerHTML =
-    "Non sei autorizzato a giocare";
 
   }
  
@@ -48,8 +38,33 @@ for(let i = 0; i < verificaMail.length; i++){
 
 // Dadi
 
+const btnDadi = document.querySelector('#Dadi');
 let randomUser = Math.floor(Math.random()*12);
+let randomPc = Math.floor(Math.random()*12);
 
 console.log(randomUser);
+console.log(randomPc);
 
-document.querySelector(".random-user").innerHTML = `${randomUser}`;
+if (verificaMail === utentiAuto[i]) {
+
+  btnDadi.addEventListener("click", function(){
+    
+    document.getElementById('random-user').innerHTML = randomUser;
+    
+    document.getElementById('random-pc').innerHTML = randomPc;
+  }
+
+}
+
+if(randomUser > randomPc){
+
+  document.getElementById('esito-partita').innerHTML = ("Hai vinto!");
+
+} else if (randomPc > randomUser){
+
+  document.getElementById('esito-partita').innerHTML = ("Hai perso :(");
+
+} else {
+
+  document.getElementById('esito-partita').innerHTML = ("Parità");
+}
