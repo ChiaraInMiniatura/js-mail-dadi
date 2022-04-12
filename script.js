@@ -18,53 +18,70 @@
 // 4. torniamo a scrivere in italiano
 // 5. proviamo ad immaginare le operazioni che vogliamo far svolgere al nostro programma così come lo faremmo “a mano”
 
+// email
+
 const utentiAuto = ["prova","chiarag295@gmail.com", "pincopanco81@gmai.com", "pancopinco82@gmail.com"];
 
 const verificaMail = prompt("Verifica la tua mail");
 
+let emailAutorizzata = false;
 
 for(let i = 0; i < verificaMail.length; i++){
   
   if (verificaMail === utentiAuto[i]) {
 
-    console.log("Ciao! Lancia i dadi per giocare");
-
-    document.getElementById("messMail").innerHTML =
-    "Ciao! Lancia i dadi per giocare";
-
+    emailAutorizzata = true;
   }
  
 }  
 
+if (emailAutorizzata === true) {
+  
+  console.log("Ciao! Lancia i dadi per giocare");
+  
+  document.getElementById("messMail").innerHTML =
+  "Ciao! Lancia i dadi per giocare";
+  
+  }else{
+  
+  console.log("Non sei autorizzato a giocare");
+  
+  document.getElementById("messMail").innerHTML =
+  "Non sei autorizzato a giocare";
+
+}
+
+
 // Dadi
-
 const btnDadi = document.querySelector('#Dadi');
-let randomUser = Math.floor(Math.random()*12);
-let randomPc = Math.floor(Math.random()*12);
 
-console.log(randomUser);
-console.log(randomPc);
-
-if (verificaMail === utentiAuto[i]) {
-
+if( emailAutorizzata === true){
+  
   btnDadi.addEventListener("click", function(){
+    
+    let randomUser = Math.ceil(Math.random()*6);
+    let randomPc = Math.ceil(Math.random()*6);
+    
+    console.log(randomUser);
+    console.log(randomPc);
     
     document.getElementById('random-user').innerHTML = randomUser;
     
     document.getElementById('random-pc').innerHTML = randomPc;
+    
+  }
+  
+  if (randomUser > randomPc){
+    
+    document.getElementById('esito-partita').innerHTML = ("Hai vinto!");
+    
+  } else if (randomPc > randomUser){
+    
+    document.getElementById('esito-partita').innerHTML = ("Hai perso :(");
+    
+  } else {
+    
+    document.getElementById('esito-partita').innerHTML = ("Parità");
   }
 
-}
-
-if(randomUser > randomPc){
-
-  document.getElementById('esito-partita').innerHTML = ("Hai vinto!");
-
-} else if (randomPc > randomUser){
-
-  document.getElementById('esito-partita').innerHTML = ("Hai perso :(");
-
-} else {
-
-  document.getElementById('esito-partita').innerHTML = ("Parità");
 }
